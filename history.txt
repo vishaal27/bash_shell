@@ -1,0 +1,240 @@
+echo "hug"
+echo "thug " sfff
+clear
+exit
+clear
+echo thug thug
+echo "thug" 'thug;
+clear
+echo
+clear
+echo		sfsf
+clear
+clear
+history
+clear
+history
+history
+clear
+history
+clear
+exit
+hhh
+clear
+exit
+date
+clear
+ls
+/home/vishaal/Desktop/C\ Programs/simpleshell/date
+date
+mkdir
+date
+ls
+clear
+mkdir
+exit
+date
+ls
+clear
+exit
+mkdir
+mkdir thug
+mkdir thug
+mkdir /bin/dsd
+mkdir thug1/thug2
+exit
+mkdir thug
+mkdir thug1 /home/vishaal/Desktop/C\ Programs/simpleshell/thug2 -v
+exit
+mkdir -v test
+mkdir -p test/test1/test2
+mkdir -v -p thug/thug1/thug2/thug3 /home/vishaal/Desktop/CPrograms/simpleshell/hell/hello
+exit
+cat /home/vishaal/Desktop/CPrograms/simpleshell/cat.c
+exit
+history
+cat mkdir.c
+cat mkdir.c --number
+cat mkdir.c -n
+cat mkdir.c shell.c ls.c --number
+exit
+cat mkdir.c -E
+exit
+cat mkdir.c -nE
+exit
+cat
+exit
+rm thug
+rm thhhh
+rm /bin
+exit
+rm -i thug6 thug2 thug7
+rm -i thug6 thug7 thug8
+clear
+exit
+rm -i thug6 thug2 thug7
+rm -i thug6 thug7 thug8
+clear
+exit
+rm -i thug1 thug434 thug2 
+exit
+rm -i thug1 thug233 thug2
+exit
+rm -i thug1 thug2 thug33 thug5
+exit
+date -u
+date
+date --universal
+exit
+date -R
+exit
+date -R
+date -uR
+date -uR
+exit
+date -Ru
+date -uR
+date
+date -u
+date -R
+exit
+rm -i a.out
+exit
+rm t2
+rm -v cat
+rm -i date
+rm -i date
+rm -iv sd
+history
+exit
+rm -i cat
+rm -i iiii
+exit
+ls
+exit
+ls
+ls /home/vishaal /home/vishaal/Desktop
+exit
+ls /home/vishaal/Documents /home/vishaal/Desktop/CPrograms/ /home/vishaal/Desktop/temboofolder
+ls fssfsf
+ls /home fwwfwfwf /home/vishaal
+exit
+ls
+ls -d /home /sffs /home/vishaal
+exit
+ls /fsfsf /home /fssfs /vishadd
+ls -d /fsfs /home/ sfsfsf /vdvdd
+exit
+cd ..
+ls
+cd ..
+ls
+pwd
+ls
+cd ..
+ls
+pwd
+ls
+ls
+ls
+cd ..
+pwd
+ls
+ls
+cd ..
+pwd
+ls
+ls
+mkdir thug1
+ls
+cd thug1
+pwd
+cd ..
+ls
+cd ..
+ls
+ls
+cd /
+ls
+ls
+cd /
+ls
+ls /home
+ls
+cd /
+ls
+ls /home
+history
+ls
+cd ..
+ls
+ls
+cd ..
+date
+ls
+cd ..
+date
+date
+ls
+cd ..
+date
+date
+cd simpleshell
+ls
+clear
+cd /home
+ls
+ls
+cd ..
+date
+date
+cd simpleshell
+ls
+clear
+cd /home
+ls
+date
+ls
+cd ..
+ls
+ls
+cd ..
+ls
+pwd
+ls
+ls
+cd ..
+ls
+pwd
+ls
+date
+date
+cd ..
+date
+pwd
+echo "thug" -n
+cd ..
+ls
+mkdir thug1/thug2/thug3
+mkdir thug1/thug2/thug3 -p
+ls
+rm thug1
+cd thug1
+cd thug2
+ls
+pwd
+date -Ru
+date
+cat dadad
+exit
+history
+cat history.txt
+cat -n history.txt
+history
+exit
+cat history.txt
+pwd
+history
+exit
+exit fsf fsfsffs
+exit
