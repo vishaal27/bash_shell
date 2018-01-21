@@ -35,4 +35,3 @@ date
 
 history
 echo -n,-E
-pwd 

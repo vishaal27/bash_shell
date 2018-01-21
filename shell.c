@@ -192,11 +192,14 @@ int main(int argc, char const *argv[])
 		else if(strstr(command,"echo")!=NULL)  //echo internal command
 		{
 			flag=1;
+			int quote_start=0;
+			int quote_finish=0;
 			parse_command(command, arguments);
 
 			int newline_flag=0;
 			int escape_flag=0;
 			char things_to_echo[1000][1000];
+			char refined_things_to_echo[1000][1000];
 			int echo_counter=0;
 
 			int size=0;
@@ -237,13 +240,61 @@ int main(int argc, char const *argv[])
 					continue;
 				}
 
+
+				int refined_echo_counter=0;
+				int i_counter=0;
+				int error_flag=0;
+
 				for(int i=1;i<echo_counter;i++)
 				{
-					printf("%s", things_to_echo[i]);
+
+					quote_start=0;
+					quote_finish=0;
+					refined_echo_counter=0;
+
+					printf("strlen(things_to_echo[i]): %d\n", strlen(things_to_echo[i]));
+
+					for (int j=0;j<strlen(things_to_echo[i]);j++)
+					{
+						printf("things_to_echo[i][j]: %c\n", things_to_echo[i][j]);
+
+						if(things_to_echo[i][j]=='"' && quote_start==0 && quote_finish==0)
+						{
+							quote_start=1;
+						}
+						else if(things_to_echo[i][j]=='"' && quote_start==1 && quote_finish==0)
+						{
+							quote_start=0;
+						}
+						else
+						{
+							refined_things_to_echo[i_counter][refined_echo_counter++]=things_to_echo[i][j];
+							printf("refined_things_to_echo[i_counter][refined_echo_counter-1]: %c\n", refined_things_to_echo[i_counter-1][refined_echo_counter-1]);
+						}
+					}
+
+					i_counter++;
+
+					if(quote_start==1 && quote_finish==0)
+					{
+						error_flag=1;
+						break;
+					}
+				}
+
+				if(error_flag==1)
+				{
+					printf("%s\n", "Parse Error: Input with unclosed quotes");
+				}
+
+				for(int i=0;i<i_counter && error_flag==0;i++)
+				{
+					printf("%s", refined_things_to_echo[i]);
 					printf("%s", " ");
 				}
 
-				printf("%s\n", " ");
+				if(error_flag==0)
+					printf("%s\n", " ");
 			}
 			else if(newline_flag==1 && escape_flag==0)
 			{
@@ -297,32 +348,8 @@ int main(int argc, char const *argv[])
 		}
 		else if(strstr(command, "pwd")!=NULL)  //pwd internal command
 		{
-			// int physical_flag=0;
-			// int logical_flag=0;
 
 			parse_command(command, arguments);
-			
-			// for(int i=0;arguments[i]!='\0';i++)
-			// {
-			// 	//printf("arguments[i]: %s\n", arguments[i]);
-
-			// 	if(strcmp(arguments[i], "-P")==0 || strcmp(arguments[i], "--physical")==0)
-			// 	{
-			// 		physical_flag=1;
-			// 	}
-			// 	else if(strcmp(arguments[i], "-L")==0 || strcmp(arguments[i], "--logical")==0)
-			// 	{
-			// 		logical_flag=1;
-			// 	}
-			// 	else if(strcmp(arguments[i], "-LP")==0 || strcmp(arguments[i], "-PL")==0)
-			// 	{
-			// 		logical_flag=1;
-			// 		physical_flag=1;
-			// 	}
-			// }
-
-			//printf("physical_flag: %d, logical_flag: %d\n", physical_flag, logical_flag);
-
 			
 			if (getcwd(cwd, sizeof(cwd)) != NULL)
 		       		printf("%s\n", cwd);
@@ -355,9 +382,6 @@ int main(int argc, char const *argv[])
 		if(flag==0 && pid==0)
 		{
 
-			//printf(": %s\n", ARGS[0]);
-
-
 			if(strcmp(ARGS[0], "date")==0)	//date external command
 			{
 				int s=strlen(cwd);
@@ -366,6 +390,7 @@ int main(int argc, char const *argv[])
 				strcpy(dat, CURRENT_DIRECTORY);
 				strcat(dat, "/date");
 				int er=execvp(dat, ARGS);
+
 				if(er==-1)
 					execvp("/home/vishaal/Desktop/CPrograms/simpleshell/date", ARGS);
 				exit(1);
@@ -378,6 +403,7 @@ int main(int argc, char const *argv[])
 				strcpy(dat, CURRENT_DIRECTORY);
 				strcat(dat, "/ls");
 				int er=execvp(dat, ARGS);
+
 				if(er==-1)
 					execvp("/home/vishaal/Desktop/CPrograms/simpleshell/ls", ARGS);
 				exit(1);
@@ -390,6 +416,7 @@ int main(int argc, char const *argv[])
 				strcpy(dat, CURRENT_DIRECTORY);
 				strcat(dat, "/cat");
 				int er=execvp(dat, ARGS);
+
 				if(er==-1)
 					execvp("/home/vishaal/Desktop/CPrograms/simpleshell/cat", ARGS);
 				exit(1);
@@ -402,6 +429,7 @@ int main(int argc, char const *argv[])
 				strcpy(dat, CURRENT_DIRECTORY);
 				strcat(dat, "/rm");
 				int er=execvp(dat, ARGS);
+
 				if(er==-1)
 					execvp("/home/vishaal/Desktop/CPrograms/simpleshell/rm", ARGS);
 				exit(1);
@@ -414,6 +442,7 @@ int main(int argc, char const *argv[])
 				strcpy(dat, CURRENT_DIRECTORY);
 				strcat(dat, "/mkdir");
 				int er=execvp(dat, ARGS);
+
 				if(er==-1)
 					execvp("/home/vishaal/Desktop/CPrograms/simpleshell/mkdir", ARGS);
 				exit(1);

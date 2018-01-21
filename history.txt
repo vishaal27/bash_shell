@@ -250,3 +250,16 @@ cd ..
 pwd
 exiy
 exit
+ls
+cat rm.c
+cd ../..
+ls
+cd java
+ls
+cat mid.cpp
+exit
+ls
+rm cat
+exit
+echo "thug" "thugwew2" ffsf
+exit
