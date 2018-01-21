@@ -192,14 +192,34 @@ int main(int argc, char const *argv[])
 		else if(strstr(command,"echo")!=NULL)  //echo internal command
 		{
 			flag=1;
-			int quote_start=0;
-			int quote_finish=0;
+			int double_quote_start=0;
+			int double_quote_finish=0;
+			int single_quote_start=0;
+			int single_quote_finish=0;
 			parse_command(command, arguments);
 
 			int newline_flag=0;
 			int escape_flag=0;
 			char things_to_echo[1000][1000];
+
+			for(int i=0;i<1000;i++)
+			{
+				for(int j=0;j<1000;j++)
+				{
+					things_to_echo[i][j]=0;
+				}
+			}
+
 			char refined_things_to_echo[1000][1000];
+
+			for(int i=0;i<1000;i++)
+			{
+				for(int j=0;j<1000;j++)
+				{
+					refined_things_to_echo[i][j]=0;
+				}
+			}
+
 			int echo_counter=0;
 
 			int size=0;
@@ -244,38 +264,76 @@ int main(int argc, char const *argv[])
 				int refined_echo_counter=0;
 				int i_counter=0;
 				int error_flag=0;
+				int added_in_current_iteration=0;
 
 				for(int i=1;i<echo_counter;i++)
 				{
 
-					quote_start=0;
-					quote_finish=0;
+					double_quote_start=0; 
+					single_quote_start=0;
+					single_quote_finish=0; 
+					double_quote_finish=0;
 					refined_echo_counter=0;
+
+					//printf("things_to_echo[i]: %s\n", things_to_echo[i]);
 
 					//printf("strlen(things_to_echo[i]): %d\n", strlen(things_to_echo[i]));
 
 					for (int j=0;j<strlen(things_to_echo[i]);j++)
 					{
-						//printf("things_to_echo[i][j]: %c\n", things_to_echo[i][j]);
 
-						if(things_to_echo[i][j]=='"' && quote_start==0 && quote_finish==0)
-						{
-							quote_start=1;
+						added_in_current_iteration=0;
+
+						if(single_quote_finish==0 && single_quote_start==0)	
+						{	
+							if(things_to_echo[i][j]=='"' && double_quote_start==0 && double_quote_finish==0)
+							{
+								double_quote_start=1;
+							}
+							else if(things_to_echo[i][j]=='"' && double_quote_start==1 && double_quote_finish==0)
+							{
+								double_quote_start=0;
+							}
+							else
+							{
+								if(double_quote_start==0 && double_quote_finish==0 && things_to_echo[i][j]=='\'');
+								else
+								{
+									added_in_current_iteration=1;
+									refined_things_to_echo[i_counter][refined_echo_counter++]=things_to_echo[i][j];
+								}
+								//printf("refined_things_to_echo[i_counter][refined_echo_counter-1]: %c\n", refined_things_to_echo[i_counter-1][refined_echo_counter-1]);
+							}
 						}
-						else if(things_to_echo[i][j]=='"' && quote_start==1 && quote_finish==0)
+
+						if(double_quote_finish==0 && double_quote_start==0)
 						{
-							quote_start=0;
-						}
-						else
-						{
-							refined_things_to_echo[i_counter][refined_echo_counter++]=things_to_echo[i][j];
-							//printf("refined_things_to_echo[i_counter][refined_echo_counter-1]: %c\n", refined_things_to_echo[i_counter-1][refined_echo_counter-1]);
+							if(things_to_echo[i][j]=='\'' && single_quote_start==0 && single_quote_finish==0)
+							{
+								single_quote_start=1;
+							}
+							else if(things_to_echo[i][j]=='\'' && single_quote_start==1 && single_quote_finish==0)
+							{
+								single_quote_start=0;
+							}
+							else
+							{
+								if(single_quote_start==0 && single_quote_finish==0 && things_to_echo[i][j]=='"');
+								else
+								{
+									if(added_in_current_iteration==0)
+										refined_things_to_echo[i_counter][refined_echo_counter++]=things_to_echo[i][j];
+								}
+								//printf("refined_things_to_echo[i_counter][refined_echo_counter-1]: %c\n", refined_things_to_echo[i_counter-1][refined_echo_counter-1]);
+							}
 						}
 					}
 
 					i_counter++;
 
-					if(quote_start==1 && quote_finish==0)
+					//printf("dqs: %d dqf: %d sqs: %d sqf: %d\n", double_quote_start, double_quote_finish, single_quote_start, single_quote_finish);
+
+					if((double_quote_start==1 && double_quote_finish==0) || (single_quote_start==1 && single_quote_finish==0))
 					{
 						error_flag=1;
 						break;
@@ -307,38 +365,76 @@ int main(int argc, char const *argv[])
 				int refined_echo_counter=0;
 				int i_counter=0;
 				int error_flag=0;
+				int added_in_current_iteration=0;
 
 				for(int i=1;i<echo_counter;i++)
 				{
 
-					quote_start=0;
-					quote_finish=0;
+					double_quote_start=0; 
+					single_quote_start=0;
+					single_quote_finish=0; 
+					double_quote_finish=0;
 					refined_echo_counter=0;
+
+					//printf("things_to_echo[i]: %s\n", things_to_echo[i]);
 
 					//printf("strlen(things_to_echo[i]): %d\n", strlen(things_to_echo[i]));
 
 					for (int j=0;j<strlen(things_to_echo[i]);j++)
 					{
-						//printf("things_to_echo[i][j]: %c\n", things_to_echo[i][j]);
 
-						if(things_to_echo[i][j]=='"' && quote_start==0 && quote_finish==0)
-						{
-							quote_start=1;
+						added_in_current_iteration=0;
+
+						if(single_quote_finish==0 && single_quote_start==0)	
+						{	
+							if(things_to_echo[i][j]=='"' && double_quote_start==0 && double_quote_finish==0)
+							{
+								double_quote_start=1;
+							}
+							else if(things_to_echo[i][j]=='"' && double_quote_start==1 && double_quote_finish==0)
+							{
+								double_quote_start=0;
+							}
+							else
+							{
+								if(double_quote_start==0 && double_quote_finish==0 && things_to_echo[i][j]=='\'');
+								else
+								{
+									added_in_current_iteration=1;
+									refined_things_to_echo[i_counter][refined_echo_counter++]=things_to_echo[i][j];
+								}
+								//printf("refined_things_to_echo[i_counter][refined_echo_counter-1]: %c\n", refined_things_to_echo[i_counter-1][refined_echo_counter-1]);
+							}
 						}
-						else if(things_to_echo[i][j]=='"' && quote_start==1 && quote_finish==0)
+
+						if(double_quote_finish==0 && double_quote_start==0)
 						{
-							quote_start=0;
-						}
-						else
-						{
-							refined_things_to_echo[i_counter][refined_echo_counter++]=things_to_echo[i][j];
-							//printf("refined_things_to_echo[i_counter][refined_echo_counter-1]: %c\n", refined_things_to_echo[i_counter-1][refined_echo_counter-1]);
+							if(things_to_echo[i][j]=='\'' && single_quote_start==0 && single_quote_finish==0)
+							{
+								single_quote_start=1;
+							}
+							else if(things_to_echo[i][j]=='\'' && single_quote_start==1 && single_quote_finish==0)
+							{
+								single_quote_start=0;
+							}
+							else
+							{
+								if(single_quote_start==0 && single_quote_finish==0 && things_to_echo[i][j]=='"');
+								else
+								{
+									if(added_in_current_iteration==0)
+										refined_things_to_echo[i_counter][refined_echo_counter++]=things_to_echo[i][j];
+								}
+								//printf("refined_things_to_echo[i_counter][refined_echo_counter-1]: %c\n", refined_things_to_echo[i_counter-1][refined_echo_counter-1]);
+							}
 						}
 					}
 
 					i_counter++;
 
-					if(quote_start==1 && quote_finish==0)
+					//printf("dqs: %d dqf: %d sqs: %d sqf: %d\n", double_quote_start, double_quote_finish, single_quote_start, single_quote_finish);
+
+					if((double_quote_start==1 && double_quote_finish==0) || (single_quote_start==1 && single_quote_finish==0))
 					{
 						error_flag=1;
 						break;
@@ -371,38 +467,76 @@ int main(int argc, char const *argv[])
 				int refined_echo_counter=0;
 				int i_counter=0;
 				int error_flag=0;
+				int added_in_current_iteration=0;
 
 				for(int i=1;i<echo_counter;i++)
 				{
 
-					quote_start=0;
-					quote_finish=0;
+					double_quote_start=0; 
+					single_quote_start=0;
+					single_quote_finish=0; 
+					double_quote_finish=0;
 					refined_echo_counter=0;
+
+					//printf("things_to_echo[i]: %s\n", things_to_echo[i]);
 
 					//printf("strlen(things_to_echo[i]): %d\n", strlen(things_to_echo[i]));
 
 					for (int j=0;j<strlen(things_to_echo[i]);j++)
 					{
-						//printf("things_to_echo[i][j]: %c\n", things_to_echo[i][j]);
 
-						if(things_to_echo[i][j]=='"' && quote_start==0 && quote_finish==0)
-						{
-							quote_start=1;
+						added_in_current_iteration=0;
+
+						if(single_quote_finish==0 && single_quote_start==0)	
+						{	
+							if(things_to_echo[i][j]=='"' && double_quote_start==0 && double_quote_finish==0)
+							{
+								double_quote_start=1;
+							}
+							else if(things_to_echo[i][j]=='"' && double_quote_start==1 && double_quote_finish==0)
+							{
+								double_quote_start=0;
+							}
+							else
+							{
+								if(double_quote_start==0 && double_quote_finish==0 && things_to_echo[i][j]=='\'');
+								else
+								{
+									added_in_current_iteration=1;
+									refined_things_to_echo[i_counter][refined_echo_counter++]=things_to_echo[i][j];
+								}
+								//printf("refined_things_to_echo[i_counter][refined_echo_counter-1]: %c\n", refined_things_to_echo[i_counter-1][refined_echo_counter-1]);
+							}
 						}
-						else if(things_to_echo[i][j]=='"' && quote_start==1 && quote_finish==0)
+
+						if(double_quote_finish==0 && double_quote_start==0)
 						{
-							quote_start=0;
-						}
-						else
-						{
-							refined_things_to_echo[i_counter][refined_echo_counter++]=things_to_echo[i][j];
-							//printf("refined_things_to_echo[i_counter][refined_echo_counter-1]: %c\n", refined_things_to_echo[i_counter-1][refined_echo_counter-1]);
+							if(things_to_echo[i][j]=='\'' && single_quote_start==0 && single_quote_finish==0)
+							{
+								single_quote_start=1;
+							}
+							else if(things_to_echo[i][j]=='\'' && single_quote_start==1 && single_quote_finish==0)
+							{
+								single_quote_start=0;
+							}
+							else
+							{
+								if(single_quote_start==0 && single_quote_finish==0 && things_to_echo[i][j]=='"');
+								else
+								{
+									if(added_in_current_iteration==0)
+										refined_things_to_echo[i_counter][refined_echo_counter++]=things_to_echo[i][j];
+								}
+								//printf("refined_things_to_echo[i_counter][refined_echo_counter-1]: %c\n", refined_things_to_echo[i_counter-1][refined_echo_counter-1]);
+							}
 						}
 					}
 
 					i_counter++;
 
-					if(quote_start==1 && quote_finish==0)
+					//printf("dqs: %d dqf: %d sqs: %d sqf: %d\n", double_quote_start, double_quote_finish, single_quote_start, single_quote_finish);
+
+					if((double_quote_start==1 && double_quote_finish==0) || (single_quote_start==1 && single_quote_finish==0))
 					{
 						error_flag=1;
 						break;
@@ -434,38 +568,76 @@ int main(int argc, char const *argv[])
 				int refined_echo_counter=0;
 				int i_counter=0;
 				int error_flag=0;
+				int added_in_current_iteration=0;
 
 				for(int i=1;i<echo_counter;i++)
 				{
 
-					quote_start=0;
-					quote_finish=0;
+					double_quote_start=0; 
+					single_quote_start=0;
+					single_quote_finish=0; 
+					double_quote_finish=0;
 					refined_echo_counter=0;
+
+					//printf("things_to_echo[i]: %s\n", things_to_echo[i]);
 
 					//printf("strlen(things_to_echo[i]): %d\n", strlen(things_to_echo[i]));
 
 					for (int j=0;j<strlen(things_to_echo[i]);j++)
 					{
-						//printf("things_to_echo[i][j]: %c\n", things_to_echo[i][j]);
 
-						if(things_to_echo[i][j]=='"' && quote_start==0 && quote_finish==0)
-						{
-							quote_start=1;
+						added_in_current_iteration=0;
+
+						if(single_quote_finish==0 && single_quote_start==0)	
+						{	
+							if(things_to_echo[i][j]=='"' && double_quote_start==0 && double_quote_finish==0)
+							{
+								double_quote_start=1;
+							}
+							else if(things_to_echo[i][j]=='"' && double_quote_start==1 && double_quote_finish==0)
+							{
+								double_quote_start=0;
+							}
+							else
+							{
+								if(double_quote_start==0 && double_quote_finish==0 && things_to_echo[i][j]=='\'');
+								else
+								{
+									added_in_current_iteration=1;
+									refined_things_to_echo[i_counter][refined_echo_counter++]=things_to_echo[i][j];
+								}
+								//printf("refined_things_to_echo[i_counter][refined_echo_counter-1]: %c\n", refined_things_to_echo[i_counter-1][refined_echo_counter-1]);
+							}
 						}
-						else if(things_to_echo[i][j]=='"' && quote_start==1 && quote_finish==0)
+
+						if(double_quote_finish==0 && double_quote_start==0)
 						{
-							quote_start=0;
-						}
-						else
-						{
-							refined_things_to_echo[i_counter][refined_echo_counter++]=things_to_echo[i][j];
-							//printf("refined_things_to_echo[i_counter][refined_echo_counter-1]: %c\n", refined_things_to_echo[i_counter-1][refined_echo_counter-1]);
+							if(things_to_echo[i][j]=='\'' && single_quote_start==0 && single_quote_finish==0)
+							{
+								single_quote_start=1;
+							}
+							else if(things_to_echo[i][j]=='\'' && single_quote_start==1 && single_quote_finish==0)
+							{
+								single_quote_start=0;
+							}
+							else
+							{
+								if(single_quote_start==0 && single_quote_finish==0 && things_to_echo[i][j]=='"');
+								else
+								{
+									if(added_in_current_iteration==0)
+										refined_things_to_echo[i_counter][refined_echo_counter++]=things_to_echo[i][j];
+								}
+								//printf("refined_things_to_echo[i_counter][refined_echo_counter-1]: %c\n", refined_things_to_echo[i_counter-1][refined_echo_counter-1]);
+							}
 						}
 					}
 
 					i_counter++;
 
-					if(quote_start==1 && quote_finish==0)
+					//printf("dqs: %d dqf: %d sqs: %d sqf: %d\n", double_quote_start, double_quote_finish, single_quote_start, single_quote_finish);
+
+					if((double_quote_start==1 && double_quote_finish==0) || (single_quote_start==1 && single_quote_finish==0))
 					{
 						error_flag=1;
 						break;
