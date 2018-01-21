@@ -252,11 +252,11 @@ int main(int argc, char const *argv[])
 					quote_finish=0;
 					refined_echo_counter=0;
 
-					printf("strlen(things_to_echo[i]): %d\n", strlen(things_to_echo[i]));
+					//printf("strlen(things_to_echo[i]): %d\n", strlen(things_to_echo[i]));
 
 					for (int j=0;j<strlen(things_to_echo[i]);j++)
 					{
-						printf("things_to_echo[i][j]: %c\n", things_to_echo[i][j]);
+						//printf("things_to_echo[i][j]: %c\n", things_to_echo[i][j]);
 
 						if(things_to_echo[i][j]=='"' && quote_start==0 && quote_finish==0)
 						{
@@ -269,7 +269,7 @@ int main(int argc, char const *argv[])
 						else
 						{
 							refined_things_to_echo[i_counter][refined_echo_counter++]=things_to_echo[i][j];
-							printf("refined_things_to_echo[i_counter][refined_echo_counter-1]: %c\n", refined_things_to_echo[i_counter-1][refined_echo_counter-1]);
+							//printf("refined_things_to_echo[i_counter][refined_echo_counter-1]: %c\n", refined_things_to_echo[i_counter-1][refined_echo_counter-1]);
 						}
 					}
 
@@ -304,12 +304,60 @@ int main(int argc, char const *argv[])
 					continue;
 				}
 
+				int refined_echo_counter=0;
+				int i_counter=0;
+				int error_flag=0;
+
 				for(int i=1;i<echo_counter;i++)
 				{
-					printf("%s", things_to_echo[i]);
-					if(i<echo_counter-1)
-						printf("%s", " ");
+
+					quote_start=0;
+					quote_finish=0;
+					refined_echo_counter=0;
+
+					//printf("strlen(things_to_echo[i]): %d\n", strlen(things_to_echo[i]));
+
+					for (int j=0;j<strlen(things_to_echo[i]);j++)
+					{
+						//printf("things_to_echo[i][j]: %c\n", things_to_echo[i][j]);
+
+						if(things_to_echo[i][j]=='"' && quote_start==0 && quote_finish==0)
+						{
+							quote_start=1;
+						}
+						else if(things_to_echo[i][j]=='"' && quote_start==1 && quote_finish==0)
+						{
+							quote_start=0;
+						}
+						else
+						{
+							refined_things_to_echo[i_counter][refined_echo_counter++]=things_to_echo[i][j];
+							//printf("refined_things_to_echo[i_counter][refined_echo_counter-1]: %c\n", refined_things_to_echo[i_counter-1][refined_echo_counter-1]);
+						}
+					}
+
+					i_counter++;
+
+					if(quote_start==1 && quote_finish==0)
+					{
+						error_flag=1;
+						break;
+					}
 				}
+
+				if(error_flag==1)
+				{
+					printf("%s\n", "Parse Error: Input with unclosed quotes");
+				}
+
+				for(int i=0;i<i_counter && error_flag==0;i++)
+				{
+					printf("%s", refined_things_to_echo[i]);
+					printf("%s", " ");
+				}
+
+				if(error_flag==0)
+					printf("%s", " ");
 
 			}
 			else if(newline_flag==0 && escape_flag==1)
@@ -320,13 +368,60 @@ int main(int argc, char const *argv[])
 					continue;
 				}
 
+				int refined_echo_counter=0;
+				int i_counter=0;
+				int error_flag=0;
+
 				for(int i=1;i<echo_counter;i++)
 				{
-					printf("%s", things_to_echo[i]);
+
+					quote_start=0;
+					quote_finish=0;
+					refined_echo_counter=0;
+
+					//printf("strlen(things_to_echo[i]): %d\n", strlen(things_to_echo[i]));
+
+					for (int j=0;j<strlen(things_to_echo[i]);j++)
+					{
+						//printf("things_to_echo[i][j]: %c\n", things_to_echo[i][j]);
+
+						if(things_to_echo[i][j]=='"' && quote_start==0 && quote_finish==0)
+						{
+							quote_start=1;
+						}
+						else if(things_to_echo[i][j]=='"' && quote_start==1 && quote_finish==0)
+						{
+							quote_start=0;
+						}
+						else
+						{
+							refined_things_to_echo[i_counter][refined_echo_counter++]=things_to_echo[i][j];
+							//printf("refined_things_to_echo[i_counter][refined_echo_counter-1]: %c\n", refined_things_to_echo[i_counter-1][refined_echo_counter-1]);
+						}
+					}
+
+					i_counter++;
+
+					if(quote_start==1 && quote_finish==0)
+					{
+						error_flag=1;
+						break;
+					}
+				}
+
+				if(error_flag==1)
+				{
+					printf("%s\n", "Parse Error: Input with unclosed quotes");
+				}
+
+				for(int i=0;i<i_counter && error_flag==0;i++)
+				{
+					printf("%s", refined_things_to_echo[i]);
 					printf("%s", " ");
 				}
 
-				printf("%s\n", " ");
+				if(error_flag==0)
+					printf("%s\n", " ");
 			}
 			else
 			{
@@ -336,12 +431,60 @@ int main(int argc, char const *argv[])
 					continue;
 				}
 
+				int refined_echo_counter=0;
+				int i_counter=0;
+				int error_flag=0;
+
 				for(int i=1;i<echo_counter;i++)
 				{
-					printf("%s", things_to_echo[i]);
-					if(i<echo_counter-1)
-						printf("%s", " ");
+
+					quote_start=0;
+					quote_finish=0;
+					refined_echo_counter=0;
+
+					//printf("strlen(things_to_echo[i]): %d\n", strlen(things_to_echo[i]));
+
+					for (int j=0;j<strlen(things_to_echo[i]);j++)
+					{
+						//printf("things_to_echo[i][j]: %c\n", things_to_echo[i][j]);
+
+						if(things_to_echo[i][j]=='"' && quote_start==0 && quote_finish==0)
+						{
+							quote_start=1;
+						}
+						else if(things_to_echo[i][j]=='"' && quote_start==1 && quote_finish==0)
+						{
+							quote_start=0;
+						}
+						else
+						{
+							refined_things_to_echo[i_counter][refined_echo_counter++]=things_to_echo[i][j];
+							//printf("refined_things_to_echo[i_counter][refined_echo_counter-1]: %c\n", refined_things_to_echo[i_counter-1][refined_echo_counter-1]);
+						}
+					}
+
+					i_counter++;
+
+					if(quote_start==1 && quote_finish==0)
+					{
+						error_flag=1;
+						break;
+					}
 				}
+
+				if(error_flag==1)
+				{
+					printf("%s\n", "Parse Error: Input with unclosed quotes");
+				}
+
+				for(int i=0;i<i_counter && error_flag==0;i++)
+				{
+					printf("%s", refined_things_to_echo[i]);
+					printf("%s", " ");
+				}
+
+				if(error_flag==0)
+					printf("%s", " ");
 			}
 
 			continue;

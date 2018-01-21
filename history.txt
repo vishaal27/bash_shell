@@ -263,3 +263,5 @@ rm cat
 exit
 echo "thug" "thugwew2" ffsf
 exit
+echo -n "thug" 'fsfsfs""
+exit
