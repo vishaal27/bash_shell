@@ -238,3 +238,15 @@ history
 exit
 exit fsf fsfsffs
 exit
+pwd
+ls
+cd ..
+pwd
+exiy
+exit
+pwd
+ls
+cd ..
+pwd
+exiy
+exit

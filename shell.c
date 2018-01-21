@@ -92,8 +92,11 @@ int main(int argc, char const *argv[])
 	char* ARGS[100];
 	char history[1000][1000];	//can store upto 1000 commands for history
 	int counter=0;
+	char CURRENT_DIRECTORY[1000];
 	
 	FILE *fp=fopen("history.txt", "ab+");
+
+	getcwd(CURRENT_DIRECTORY, sizeof(CURRENT_DIRECTORY));
 	
 	while(1)
 	{
@@ -294,56 +297,37 @@ int main(int argc, char const *argv[])
 		}
 		else if(strstr(command, "pwd")!=NULL)  //pwd internal command
 		{
-			int physical_flag=0;
-			int logical_flag=0;
+			// int physical_flag=0;
+			// int logical_flag=0;
 
 			parse_command(command, arguments);
 			
-			for(int i=0;arguments[i]!='\0';i++)
-			{
-				//printf("arguments[i]: %s\n", arguments[i]);
+			// for(int i=0;arguments[i]!='\0';i++)
+			// {
+			// 	//printf("arguments[i]: %s\n", arguments[i]);
 
-				if(strcmp(arguments[i], "-P")==0 || strcmp(arguments[i], "--physical")==0)
-				{
-					physical_flag=1;
-				}
-				else if(strcmp(arguments[i], "-L")==0 || strcmp(arguments[i], "--logical")==0)
-				{
-					logical_flag=1;
-				}
-				else if(strcmp(arguments[i], "-LP")==0 || strcmp(arguments[i], "-PL")==0)
-				{
-					logical_flag=1;
-					physical_flag=1;
-				}
-			}
+			// 	if(strcmp(arguments[i], "-P")==0 || strcmp(arguments[i], "--physical")==0)
+			// 	{
+			// 		physical_flag=1;
+			// 	}
+			// 	else if(strcmp(arguments[i], "-L")==0 || strcmp(arguments[i], "--logical")==0)
+			// 	{
+			// 		logical_flag=1;
+			// 	}
+			// 	else if(strcmp(arguments[i], "-LP")==0 || strcmp(arguments[i], "-PL")==0)
+			// 	{
+			// 		logical_flag=1;
+			// 		physical_flag=1;
+			// 	}
+			// }
 
 			//printf("physical_flag: %d, logical_flag: %d\n", physical_flag, logical_flag);
 
-			if(physical_flag==0 && logical_flag==0)
-			{
-				if (getcwd(cwd, sizeof(cwd)) != NULL)
+			
+			if (getcwd(cwd, sizeof(cwd)) != NULL)
 		       		printf("%s\n", cwd);
-		   		else
+		   	else
 		       		perror("getcwd() error");
-			}
-			else if(physical_flag==1 && logical_flag==0)
-			{
-				if (getcwd(cwd, sizeof(cwd)) != NULL)
-		       		printf("%s\n", cwd);
-		   		else
-		       		perror("getcwd() error");
-			}
-			else if(physical_flag==0 && logical_flag==1)
-			{
-				//TODO
-				printf("%s\n", "logical");
-			}
-			else
-			{
-				//TODO
-			}
-
 			continue;
 		}
 
@@ -379,7 +363,7 @@ int main(int argc, char const *argv[])
 				int s=strlen(cwd);
 				char dat[s+6];
 
-				strcpy(dat, cwd);
+				strcpy(dat, CURRENT_DIRECTORY);
 				strcat(dat, "/date");
 				int er=execvp(dat, ARGS);
 				if(er==-1)
@@ -391,7 +375,7 @@ int main(int argc, char const *argv[])
 				int s=strlen(cwd);
 				char dat[s+4];
 
-				strcpy(dat, cwd);
+				strcpy(dat, CURRENT_DIRECTORY);
 				strcat(dat, "/ls");
 				int er=execvp(dat, ARGS);
 				if(er==-1)
@@ -403,7 +387,7 @@ int main(int argc, char const *argv[])
 				int s=strlen(cwd);
 				char dat[s+5];
 
-				strcpy(dat, cwd);
+				strcpy(dat, CURRENT_DIRECTORY);
 				strcat(dat, "/cat");
 				int er=execvp(dat, ARGS);
 				if(er==-1)
@@ -415,7 +399,7 @@ int main(int argc, char const *argv[])
 				int s=strlen(cwd);
 				char dat[s+4];
 
-				strcpy(dat, cwd);
+				strcpy(dat, CURRENT_DIRECTORY);
 				strcat(dat, "/rm");
 				int er=execvp(dat, ARGS);
 				if(er==-1)
@@ -427,7 +411,7 @@ int main(int argc, char const *argv[])
 				int s=strlen(cwd);
 				char dat[s+7];
 
-				strcpy(dat, cwd);
+				strcpy(dat, CURRENT_DIRECTORY);
 				strcat(dat, "/mkdir");
 				int er=execvp(dat, ARGS);
 				if(er==-1)
