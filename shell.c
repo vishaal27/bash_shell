@@ -275,10 +275,6 @@ int main(int argc, char const *argv[])
 					double_quote_finish=0;
 					refined_echo_counter=0;
 
-					//printf("things_to_echo[i]: %s\n", things_to_echo[i]);
-
-					//printf("strlen(things_to_echo[i]): %d\n", strlen(things_to_echo[i]));
-
 					for (int j=0;j<strlen(things_to_echo[i]);j++)
 					{
 

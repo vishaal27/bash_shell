@@ -6,3 +6,24 @@ echo "thuf"
 echo "fddff'"
 echo "fsfsffsf'fsf'" 'fsf"fsff'
 exit
+echo 'fsf"fsfs"' "fs"
+exit
+ls -a
+ls -d
+exit
+mkdir tesssttt
+ls
+rm tesssttt
+ls
+exit
+date
+date
+date
+date
+date
+exit
+date
+date -R
+date
+date -R
+exit

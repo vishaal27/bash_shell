@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
+#include <stdlib.h>
 
 char* remove_new_line(char* str)
 {
@@ -46,6 +47,8 @@ int main(int argc, char const *argv[])
 	{
 		time_t cur_time;
 		cur_time=time(NULL);
+
+		struct tm local_time={0};
 		char* t=ctime(&cur_time);
 		remove_new_line(t);
 
@@ -54,7 +57,10 @@ int main(int argc, char const *argv[])
 			printf("%c", t[i]);
 		}	
 
-		printf("%s", "IST ");
+		localtime_r(&cur_time, &local_time);
+		
+		printf("%s", local_time.tm_zone);
+		printf("%s", " ");
 
 		for(int i=strlen(t)-4;i<strlen(t);i++)
 		{
@@ -68,6 +74,7 @@ int main(int argc, char const *argv[])
 		time_t cur_time;
 		cur_time=time(NULL);
 		char* t=ctime(&cur_time);
+		struct tm local_time={0};
 		remove_new_line(t);
 
 		char day[4];
@@ -140,7 +147,48 @@ int main(int argc, char const *argv[])
 			printf("%c", ttime[i]);
 		}
 
-		printf("%s\n", " +0530");
+		localtime_r(&cur_time, &local_time);
+		//printf("\t%ld\n",local_time.tm_gmtoff);
+		
+
+
+		long int tz=local_time.tm_gmtoff/360;
+		int units=tz%10;
+		int actual=0;
+
+		// printf("tz: %ld\n", tz);
+		// printf("units: %d\n", units);
+		
+
+		if(tz>=0)
+			actual=(tz/10)%10;
+		else
+			actual=(tz/10)%10;
+		//printf("actual: %d\n", actual);
+		if(tz>=0)
+		{
+			printf("%s", " +");
+			if(actual<10)
+				printf("%s", "0");
+			printf("%d", abs(actual));
+			if(units==5)
+				printf("%s\n", "30");
+			else
+				printf("%s\n", "00");
+		}
+		else
+		{
+			printf("%s", " -");
+			if(actual<10)
+				printf("%s", "0");
+			printf("%d", abs(actual));
+			if(units==5)
+				printf("%s\n", "30");
+			else
+				printf("%s\n", "00");
+		}
+
+		//printf("%s\n", " +0530");
 	}
 	else if(rfc_flag==0 && utc_flag==1)
 	{
