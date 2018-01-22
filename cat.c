@@ -1,6 +1,10 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
+
 
 char* remove_new_line(char* str)
 {
@@ -17,6 +21,15 @@ char* remove_new_line(char* str)
 	}
 
 	return str;
+}
+
+int is_dir(char *path)
+{
+   struct stat s;
+   if(stat(path, &s)!=0)	//error
+       return 0;
+   int ret=S_ISDIR(s.st_mode);
+   return ret;
 }
 
 
@@ -81,6 +94,14 @@ int main(int argc, char const *argv[])
 				//absolute path
 				fp=fopen(files[i], "r");
 
+				//printf("is_dir: %d\n", is_dir(files[i]));
+
+				if(is_dir(files[i])==1)
+				{
+					printf("cat: %s: Is a directory\n", files[i]);
+					continue;
+				}
+
 				if(!fp)
 				{
 					printf("cat: %s: No such file or directory\n", files[i]);
@@ -98,6 +119,14 @@ int main(int argc, char const *argv[])
 			{
 				//relative path
 				fp=fopen(path, "r");
+
+				//printf("is_dir: %d\n", is_dir(files[i]));
+
+				if(is_dir(files[i])==1)
+				{
+					printf("cat: %s: Is a directory\n", files[i]);
+					continue;
+				}
 
 				if(!fp)
 				{
@@ -135,6 +164,12 @@ int main(int argc, char const *argv[])
 				//absolute path
 				fp=fopen(files[i], "r");
 
+				if(is_dir(files[i])==1)
+				{
+					printf("cat: %s: Is a directory\n", files[i]);
+					continue;
+				}
+
 				if(!fp)
 				{
 					printf("cat: %s: No such file or directory\n", files[i]);
@@ -155,6 +190,12 @@ int main(int argc, char const *argv[])
 			{
 				//relative path
 				fp=fopen(path, "r");
+
+				if(is_dir(files[i])==1)
+				{
+					printf("cat: %s: Is a directory\n", files[i]);
+					continue;
+				}
 
 				if(!fp)
 				{
@@ -192,6 +233,12 @@ int main(int argc, char const *argv[])
 				//absolute path
 				fp=fopen(files[i], "r");
 
+				if(is_dir(files[i])==1)
+				{
+					printf("cat: %s: Is a directory\n", files[i]);
+					continue;
+				}
+
 				if(!fp)
 				{
 					printf("cat: %s: No such file or directory\n", files[i]);
@@ -210,6 +257,12 @@ int main(int argc, char const *argv[])
 			{
 				//relative path
 				fp=fopen(path, "r");
+
+				if(is_dir(files[i])==1)
+				{
+					printf("cat: %s: Is a directory\n", files[i]);
+					continue;
+				}
 
 				if(!fp)
 				{
@@ -249,6 +302,12 @@ int main(int argc, char const *argv[])
 				//absolute path
 				fp=fopen(files[i], "r");
 
+				if(is_dir(files[i])==1)
+				{
+					printf("cat: %s: Is a directory\n", files[i]);
+					continue;
+				}
+
 				if(!fp)
 				{
 					printf("cat: %s: No such file or directory\n", files[i]);
@@ -268,6 +327,12 @@ int main(int argc, char const *argv[])
 			{
 				//relative path
 				fp=fopen(path, "r");
+
+				if(is_dir(files[i])==1)
+				{
+					printf("cat: %s: Is a directory\n", files[i]);
+					continue;
+				}
 
 				if(!fp)
 				{

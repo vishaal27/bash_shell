@@ -27,3 +27,8 @@ date -R
 date
 date -R
 exit
+pwd
+cd ..
+ls
+echo "thug'ffsf" 'sfsf\n"'
+history

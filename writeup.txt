@@ -42,6 +42,7 @@ The errors handled are:
 The errors handled are:
 	-If no files are entered as input arguments, then an error message is displayed on the shell.
 	-If the files entered do not exist, an error message is printed.
+	-If the argument entered is a directory, then an error message is displayed.
 
 3) date: The date command is used to display the current system time and date. It uses the asctime(), time(), ctime() and localtime_r() system calls. It can handle two command line options. They are->
 	-R: This option is used to format the output in in RFC 2822 format. Eg. Sun, 1 Jan 2018 00:00:00 +0530
