@@ -43,7 +43,7 @@ int main(int argc, char const *argv[])
 
 	if(argc==1)
 	{
-		printf("%s\n", "cat: No files entered");
+		printf("%s\n", "cat: No files entered. Error");
 		return 1;
 	}
 

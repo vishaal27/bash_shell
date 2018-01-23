@@ -1,34 +1,38 @@
-echo "thug"
-echo 'thug'
-echo "thug'"
-exit
-echo "thuf"
-echo "fddff'"
-echo "fsfsffsf'fsf'" 'fsf"fsff'
-exit
-echo 'fsf"fsfs"' "fs"
-exit
-ls -a
-ls -d
-exit
-mkdir tesssttt
+mkdir thug
+mkdir -p thug2/thuggd/grb
 ls
-rm tesssttt
+cd thug2
+ls
+cd thuggd
 ls
 exit
-date
-date
-date
-date
-date
-exit
-date
-date -R
-date
-date -R
-exit
-pwd
-cd ..
-ls
-echo "thug'ffsf" 'sfsf\n"'
+histsf
 history
+exit
+histsf
+exit
+cd          ..
+cd                 simpleshell
+ls
+              ls
+                 ls
+            cat ls.c
+clea
+exit
+cd          ..
+cd                 simpleshell
+ls
+              ls
+                 ls
+            cat ls.c
+clea
+exit
+cd
+cd        /home
+cd                        /gomdsg
+cd          
+cd                                    
+exit
+cd
+cat
+exit

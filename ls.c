@@ -40,7 +40,6 @@ int main(int argc, char const *argv[])
 		}
 	}
 
-	//printf("%s\n", "thug");
 
 	if(all_flag==0 && directory_flag==0)
 	{

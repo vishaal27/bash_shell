@@ -1,0 +1,25 @@
+pwd
+echo "thug'ffsf" 'sfsf\n"'
+echo "thug'
+history
+cd ..
+cd /home
+ls
+ls -a
+ls -d /usr/bin
+cat iqb_assignment_1.c
+cat simpleshell
+cat -n writeup.txt
+cat -E shell.c
+cat -En ls.c
+date
+date -R
+date -u
+date -Ru
+rm ls.txt -i
+rm -v date
+mkdir thug1
+mkdir -p /hug1/hug2/hug3
+mkdir -p /usr/bin/hellotest
+mkdir -v hugggsfs
+exit

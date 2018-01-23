@@ -12,7 +12,7 @@ int mkdir_for_parent(char* file_path, mode_t mode)
 	assert(file_path && *file_path);
 	char* p;
 	
-	for(p=strchr(file_path+1, '/');p;p=strchr(p+1, '/'))
+	for(p=strchr(file_path+1, '/');p!=NULL;p=strchr(p+1, '/'))
 	{
 		*p='\0';
 		if(mkdir(file_path, mode)==-1)

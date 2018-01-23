@@ -140,13 +140,57 @@ int main(int argc, char const *argv[])
 			flag=1;
 			break;
 		}
+		else if(strcmp(command,"cd\n")==0) //cd internal command(only cd\n)
+		{
+			struct passwd *pw;
+			char* name=NULL;
+			char* thug=NULL;
+			pw=getpwuid(geteuid());
+			if(pw)
+			{
+				name=pw->pw_name;
+				int l=strlen(name);
+				thug=malloc(6+l+1);
+				strcpy(thug, "/home/");
+			 	strcat(thug, name);
+				chdir(thug);
+			}
+			else
+				chdir("/home/vishaal");
+			continue;
+		}
 		else if(strstr(command,"cd ")!=NULL) //cd internal command
 		{
 			flag=1;
 			remove_new_line(command);
 
-			char* token=&command[3];
-			if(strcmp(token, "~")==0)
+			char token[1000];
+
+			for(int k=0;k<1000;k++)
+			{
+				token[k]=0;
+			}
+			
+			int space_flag=0;
+
+			for(int k=2;k<strlen(command);k++)
+			{
+				if(command[k]!=' ')
+				{
+					space_flag=1;
+					break;
+				}
+			}
+
+			parse_command(command, arguments);
+
+
+			for(int k=0;k<strlen(arguments[1]);k++)
+			{
+				token[k]=arguments[1][k];
+			}
+
+			if(strcmp(token, "~")==0 || strcmp(command,"cd\n")==0 || space_flag==0)
 			{
 				struct passwd *pw;
 				char* name=NULL;
@@ -371,10 +415,6 @@ int main(int argc, char const *argv[])
 					single_quote_finish=0; 
 					double_quote_finish=0;
 					refined_echo_counter=0;
-
-					//printf("things_to_echo[i]: %s\n", things_to_echo[i]);
-
-					//printf("strlen(things_to_echo[i]): %d\n", strlen(things_to_echo[i]));
 
 					for (int j=0;j<strlen(things_to_echo[i]);j++)
 					{

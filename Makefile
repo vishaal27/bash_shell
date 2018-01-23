@@ -18,4 +18,7 @@ cat: cat.c
 mkdir: mkdir.c
 	gcc mkdir.c -o mkdir
 
+clean:	
+	rm -f date rm ls cat mkdir shell
+
  
